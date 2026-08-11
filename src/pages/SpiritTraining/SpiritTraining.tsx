@@ -1,9 +1,9 @@
-import { useState, useEffect, useCallback } from 'react';
+import { useState, useMemo } from 'react';
 import { useNavigate } from 'react-router-dom';
 import { useStudent } from '../../contexts/StudentContext';
 import { updateStudent } from '../../data/storage';
 import { addSpiritPower } from '../../utils/cultivation';
-import { generateWords, AIWord } from '../../utils/ai';
+import { pickRandomWords } from '../../data/words';
 import styles from './SpiritTraining.module.css';
 
 const BATCH_SIZE = 10;
@@ -12,36 +12,17 @@ export default function SpiritTraining() {
   const { student, refreshStudent } = useStudent();
   const navigate = useNavigate();
 
-  const [words, setWords] = useState<AIWord[]>([]);
+  const [round, setRound] = useState(0);
   const [currentIdx, setCurrentIdx] = useState(0);
   const [selected, setSelected] = useState<number | null>(null);
   const [showResult, setShowResult] = useState(false);
   const [correctCount, setCorrectCount] = useState(0);
-  const [loading, setLoading] = useState(true);
-  const [error, setError] = useState('');
 
-  // 生成单词
-  const fetchWords = useCallback(async () => {
-    if (!student) return;
-    setLoading(true);
-    setError('');
-    try {
-      const generated = await generateWords(student.grade, BATCH_SIZE);
-      setWords(generated);
-      setCurrentIdx(0);
-      setSelected(null);
-      setShowResult(false);
-      setCorrectCount(0);
-    } catch (e: any) {
-      setError(e.message || 'AI 生成失败，请检查网络后重试');
-    } finally {
-      setLoading(false);
-    }
-  }, [student]);
-
-  useEffect(() => {
-    fetchWords();
-  }, [fetchWords]);
+  // 每次 round 变化时重新抽词
+  const words = useMemo(() => {
+    if (!student) return [];
+    return pickRandomWords(student.grade, BATCH_SIZE);
+  }, [student, round]);
 
   if (!student) return null;
 
@@ -49,7 +30,7 @@ export default function SpiritTraining() {
   const isLastWord = currentIdx >= BATCH_SIZE - 1;
 
   function handleSelect(optIdx: number) {
-    if (showResult) return;
+    if (showResult || !currentWord) return;
     setSelected(optIdx);
     setShowResult(true);
     if (optIdx === currentWord.answerIndex) {
@@ -60,7 +41,6 @@ export default function SpiritTraining() {
   function handleNext() {
     if (!student) return;
     if (isLastWord) {
-      // 完成一组，升级
       const updates = addSpiritPower(student, BATCH_SIZE);
       const newLevel = updates.level ?? student.level;
       updateStudent(student.id, {
@@ -77,41 +57,12 @@ export default function SpiritTraining() {
     }
   }
 
-  function handleRegenerate() {
-    fetchWords();
-  }
-
-  // 加载中
-  if (loading) {
-    return (
-      <div className={styles.page}>
-        <div className={styles.container}>
-          <div className={styles.loadingCard}>
-            <div className={styles.loadingIcon}>🫧</div>
-            <h2 className={styles.loadingTitle}>灵力凝聚中...</h2>
-            <p className={styles.loadingSub}>AI 正在为你生成修炼单词</p>
-            <div className={styles.spinner} />
-          </div>
-        </div>
-      </div>
-    );
-  }
-
-  // 错误
-  if (error) {
-    return (
-      <div className={styles.page}>
-        <div className={styles.container}>
-          <div className={styles.errorCard}>
-            <div className={styles.errorIcon}>⚠️</div>
-            <h2 className={styles.errorTitle}>凝聚失败</h2>
-            <p className={styles.errorMsg}>{error}</p>
-            <button className={styles.retryBtn} onClick={handleRegenerate}>重新凝聚</button>
-            <button className={styles.backBtn} onClick={() => navigate('/home')}>返回洞府</button>
-          </div>
-        </div>
-      </div>
-    );
+  function handleShuffle() {
+    setRound(r => r + 1);
+    setCurrentIdx(0);
+    setSelected(null);
+    setShowResult(false);
+    setCorrectCount(0);
   }
 
   if (!currentWord) return null;
@@ -136,34 +87,22 @@ export default function SpiritTraining() {
 
         {/* 单词卡片 */}
         <div className={`${styles.wordCard} ${showResult ? (isCorrect ? styles.correct : styles.wrong) : ''}`}>
-          {/* 画面提示区（百词斩风格——后续可替换为真实图片） */}
           <div className={styles.imageZone}>
             <div className={styles.imagePlaceholder}>
               <span className={styles.imageEmoji}>
-                {currentWord.imageHint.includes('food') ? '🍎' :
-                 currentWord.imageHint.includes('animal') ? '🐾' :
-                 currentWord.imageHint.includes('nature') ? '🌿' :
-                 currentWord.imageHint.includes('people') ? '👤' :
-                 currentWord.imageHint.includes('city') ? '🏙️' :
-                 currentWord.imageHint.includes('book') ? '📚' :
-                 currentWord.imageHint.includes('time') ? '⏰' :
-                 currentWord.imageHint.includes('love') ? '💝' :
-                 currentWord.imageHint.includes('water') ? '💧' :
-                 '✨'}
+                {currentWord.english.length <= 3 ? '🅰️' :
+                 currentWord.english.length <= 5 ? '📝' :
+                 currentWord.english.length <= 8 ? '📖' :
+                 '📚'}
               </span>
-              <span className={styles.imageHint}>{currentWord.imageHint}</span>
+              <span className={styles.imageHint}>{currentWord.english.split('').join(' ')}</span>
             </div>
           </div>
 
-          {/* 单词 */}
           <div className={styles.wordZone}>
             <h1 className={styles.englishWord}>{currentWord.english}</h1>
-            <div className={styles.phonetic}>
-              {currentWord.english.split('').join('·')}
-            </div>
           </div>
 
-          {/* 例句 */}
           <div className={styles.exampleZone}>
             <p className={styles.example}>{currentWord.example}</p>
             {showResult && (
@@ -172,7 +111,7 @@ export default function SpiritTraining() {
           </div>
         </div>
 
-        {/* 四个选项（百词斩风格） */}
+        {/* 四个选项 */}
         <div className={styles.optionsGrid}>
           {currentWord.options.map((opt, i) => {
             let optClass = styles.option;
@@ -201,11 +140,11 @@ export default function SpiritTraining() {
           })}
         </div>
 
-        {/* 结果提示 + 下一题 */}
+        {/* 结果 */}
         {showResult && (
           <div className={styles.resultZone}>
             <div className={`${styles.resultBanner} ${isCorrect ? styles.resultCorrect : styles.resultWrong}`}>
-              {isCorrect ? '✓ 回答正确！灵力 +1' : `✗ 正确答案是：${currentWord.options[currentWord.answerIndex]}`}
+              {isCorrect ? '✓ 灵力 +1' : `✗ 正确答案：${currentWord.options[currentWord.answerIndex]}`}
             </div>
             <button className={styles.nextBtn} onClick={handleNext}>
               {isLastWord ? '✨ 完成修炼' : '下一题 ▸'}
@@ -213,10 +152,9 @@ export default function SpiritTraining() {
           </div>
         )}
 
-        {/* 答对计数 */}
         <div className={styles.scoreStrip}>
           已答对：{correctCount} / {showResult ? currentIdx + 1 : currentIdx} 词
-          <button className={styles.regenBtn} onClick={handleRegenerate}>换一批</button>
+          <button className={styles.regenBtn} onClick={handleShuffle}>换一批</button>
         </div>
       </div>
     </div>
