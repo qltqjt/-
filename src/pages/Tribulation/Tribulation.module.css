@@ -1,0 +1,193 @@
+.page {
+  flex: 1;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  padding: 80px 48px 48px;
+}
+
+.container {
+  width: 100%;
+  max-width: 550px;
+}
+
+.header {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  margin-bottom: 24px;
+}
+
+.progress {
+  font-size: 12px;
+  color: rgba(255, 255, 255, 0.35);
+  letter-spacing: 2px;
+}
+
+.spellName {
+  font-size: 13px;
+  color: rgba(200, 50, 60, 0.7);
+  letter-spacing: 2px;
+}
+
+.questionCard {
+  background: rgba(255, 255, 255, 0.03);
+  border: 1px solid rgba(255, 255, 255, 0.06);
+  padding: 32px;
+  margin-bottom: 20px;
+}
+
+.stem {
+  font-size: 18px;
+  color: #ece8e0;
+  letter-spacing: 2px;
+  font-weight: 700;
+  margin-bottom: 24px;
+  line-height: 1.6;
+}
+
+.options {
+  display: flex;
+  flex-direction: column;
+  gap: 10px;
+}
+
+.option {
+  display: flex;
+  align-items: center;
+  gap: 14px;
+  padding: 12px 16px;
+  background: rgba(255, 255, 255, 0.02);
+  border: 1px solid rgba(255, 255, 255, 0.08);
+  color: rgba(255, 255, 255, 0.65);
+  font-size: 14px;
+  font-family: inherit;
+  letter-spacing: 1px;
+  cursor: pointer;
+  transition: all 0.2s;
+  text-align: left;
+}
+
+.option:hover {
+  background: rgba(255, 255, 255, 0.05);
+  border-color: rgba(255, 255, 255, 0.15);
+}
+
+.selected {
+  background: rgba(200, 50, 60, 0.15);
+  border-color: #c8323c;
+  color: #ece8e0;
+}
+
+.optLetter {
+  width: 28px;
+  height: 28px;
+  border-radius: 50%;
+  background: rgba(255, 255, 255, 0.06);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-size: 12px;
+  font-weight: 700;
+  flex-shrink: 0;
+}
+
+.selected .optLetter {
+  background: #c8323c;
+  color: #ece8e0;
+}
+
+.submitBtn {
+  width: 100%;
+  background: #c8323c;
+  border: none;
+  color: #ece8e0;
+  padding: 14px 0;
+  font-size: 16px;
+  font-family: inherit;
+  letter-spacing: 4px;
+  cursor: pointer;
+  transition: all 0.2s;
+}
+
+.submitBtn:hover {
+  background: #a02830;
+}
+
+.submitBtn:disabled {
+  background: rgba(255, 255, 255, 0.05);
+  color: rgba(255, 255, 255, 0.15);
+  cursor: not-allowed;
+}
+
+.resultCard {
+  text-align: center;
+  padding: 40px 32px;
+  background: rgba(255, 255, 255, 0.03);
+  border: 1px solid rgba(255, 255, 255, 0.06);
+}
+
+.resultIcon {
+  font-size: 64px;
+  margin-bottom: 16px;
+}
+
+.resultTitle {
+  font-size: 28px;
+  font-weight: 900;
+  letter-spacing: 10px;
+  color: #ece8e0;
+  margin-bottom: 12px;
+}
+
+.resultDesc {
+  font-size: 14px;
+  color: rgba(255, 255, 255, 0.4);
+  letter-spacing: 2px;
+  margin-bottom: 12px;
+}
+
+.resultLevel {
+  font-size: 36px;
+  font-weight: 900;
+  color: #b8860b;
+  letter-spacing: 4px;
+  margin-bottom: 24px;
+}
+
+.resultHint {
+  font-size: 12px;
+  color: rgba(255, 255, 255, 0.25);
+  letter-spacing: 2px;
+  margin-bottom: 20px;
+}
+
+.retryBtn {
+  width: 100%;
+  background: #c8323c;
+  border: none;
+  color: #ece8e0;
+  padding: 14px 0;
+  font-size: 16px;
+  font-family: inherit;
+  letter-spacing: 4px;
+  cursor: pointer;
+  margin-bottom: 12px;
+}
+
+.backBtn {
+  width: 100%;
+  background: none;
+  border: 1px solid rgba(255, 255, 255, 0.1);
+  color: rgba(255, 255, 255, 0.3);
+  padding: 12px 0;
+  font-size: 13px;
+  font-family: inherit;
+  letter-spacing: 3px;
+  cursor: pointer;
+}
+
+.backBtn:hover {
+  color: rgba(255, 255, 255, 0.5);
+  border-color: rgba(255, 255, 255, 0.2);
+}

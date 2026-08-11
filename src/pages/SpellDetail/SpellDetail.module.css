@@ -1,0 +1,113 @@
+.page {
+  flex: 1;
+  padding: 80px 48px 48px;
+  overflow-y: auto;
+}
+
+.container {
+  max-width: 600px;
+  margin: 0 auto;
+}
+
+.backBtn {
+  background: none;
+  border: none;
+  color: rgba(255, 255, 255, 0.3);
+  font-size: 13px;
+  font-family: inherit;
+  letter-spacing: 2px;
+  cursor: pointer;
+  margin-bottom: 24px;
+  padding: 0;
+}
+
+.backBtn:hover {
+  color: rgba(255, 255, 255, 0.6);
+}
+
+.card {
+  background: rgba(255, 255, 255, 0.02);
+  border: 1px solid rgba(255, 255, 255, 0.06);
+  padding: 32px;
+}
+
+.header {
+  display: flex;
+  justify-content: space-between;
+  align-items: flex-start;
+  margin-bottom: 12px;
+}
+
+.name {
+  font-size: 32px;
+  font-weight: 900;
+  letter-spacing: 8px;
+  color: #ece8e0;
+}
+
+.diffBadge {
+  font-size: 11px;
+  padding: 4px 12px;
+  letter-spacing: 2px;
+  border: 1px solid;
+  white-space: nowrap;
+}
+
+.diff1 { color: rgba(255,255,255,0.5); border-color: rgba(255,255,255,0.2); }
+.diff2 { color: #b8860b; border-color: rgba(184,134,11,0.3); }
+.diff3 { color: #c8323c; border-color: rgba(200,50,60,0.3); }
+
+.category {
+  font-size: 12px;
+  color: rgba(255, 255, 255, 0.25);
+  letter-spacing: 2px;
+  margin-bottom: 24px;
+}
+
+.desc {
+  margin-bottom: 24px;
+}
+
+.desc h3, .quizInfo h3 {
+  font-size: 13px;
+  color: rgba(255, 255, 255, 0.35);
+  letter-spacing: 3px;
+  margin-bottom: 8px;
+}
+
+.desc p, .quizInfo p {
+  font-size: 14px;
+  color: rgba(255, 255, 255, 0.55);
+  line-height: 1.8;
+  letter-spacing: 1px;
+}
+
+.quizInfo {
+  margin-bottom: 28px;
+}
+
+.tribulationBtn {
+  width: 100%;
+  background: #c8323c;
+  border: none;
+  color: #ece8e0;
+  padding: 14px 0;
+  font-size: 18px;
+  font-family: inherit;
+  letter-spacing: 6px;
+  cursor: pointer;
+  transition: all 0.2s;
+}
+
+.tribulationBtn:hover {
+  background: #a02830;
+}
+
+.learnedBanner {
+  text-align: center;
+  padding: 14px;
+  font-size: 14px;
+  color: rgba(184, 134, 11, 0.6);
+  letter-spacing: 3px;
+  border: 1px solid rgba(184, 134, 11, 0.15);
+}

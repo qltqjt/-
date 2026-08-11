@@ -1,21 +1,41 @@
-import { BrowserRouter, Routes, Route } from 'react-router-dom'
+import { BrowserRouter, Routes, Route, Navigate } from 'react-router-dom'
+import { StudentProvider, useStudent } from './contexts/StudentContext'
+import Sidebar from './components/Sidebar/Sidebar'
+import TopBar from './components/TopBar/TopBar'
+import StudentSelect from './pages/StudentSelect/StudentSelect'
+import Home from './pages/Home/Home'
+import SpiritTraining from './pages/SpiritTraining/SpiritTraining'
+import Library from './pages/Library/Library'
+import SpellDetail from './pages/SpellDetail/SpellDetail'
+import Tribulation from './pages/Tribulation/Tribulation'
 import styles from './App.module.css'
 
-function App() {
+function AppLayout() {
+  const { student } = useStudent()
   return (
-    <BrowserRouter>
-      <div className={styles.layout}>
+    <div className={styles.layout}>
+      <Sidebar />
+      <div className={styles.mainArea}>
+        <TopBar />
         <Routes>
-          <Route path="/" element={
-            <div className={styles.placeholder}>
-              <h1>英语的修仙之路</h1>
-              <p>学生选择页 — 即将呈现</p>
-            </div>
-          } />
+          <Route path="/" element={<StudentSelect />} />
+          <Route path="/home" element={student ? <Home /> : <Navigate to="/" />} />
+          <Route path="/spirit-training" element={student ? <SpiritTraining /> : <Navigate to="/" />} />
+          <Route path="/library" element={student ? <Library /> : <Navigate to="/" />} />
+          <Route path="/spell/:spellId" element={student ? <SpellDetail /> : <Navigate to="/" />} />
+          <Route path="/tribulation/:spellId" element={student ? <Tribulation /> : <Navigate to="/" />} />
         </Routes>
       </div>
-    </BrowserRouter>
+    </div>
   )
 }
 
-export default App
+export default function App() {
+  return (
+    <BrowserRouter>
+      <StudentProvider>
+        <AppLayout />
+      </StudentProvider>
+    </BrowserRouter>
+  )
+}

@@ -1,0 +1,171 @@
+.page {
+  flex: 1;
+  display: flex;
+  align-items: center;
+  padding: 80px 48px 48px;
+  position: relative;
+}
+
+.content {
+  width: 100%;
+  display: flex;
+  flex-direction: column;
+  gap: 24px;
+}
+
+.cardRow {
+  display: flex;
+  gap: 24px;
+}
+
+/* ── 境界主卡片 ── */
+.heroCard {
+  flex: 2;
+  background: linear-gradient(160deg, rgba(255, 255, 255, 0.03), rgba(255, 255, 255, 0.01));
+  border: 1px solid rgba(255, 255, 255, 0.06);
+  padding: 40px;
+  position: relative;
+  overflow: hidden;
+}
+
+.heroCard::before {
+  content: '';
+  position: absolute;
+  right: -40px;
+  bottom: -60px;
+  width: 300px;
+  height: 300px;
+  background: radial-gradient(circle, rgba(200, 50, 60, 0.04) 0%, transparent 70%);
+  pointer-events: none;
+}
+
+.realmEmoji {
+  font-size: 64px;
+  margin-bottom: 12px;
+}
+
+.realmName {
+  font-size: 38px;
+  font-weight: 900;
+  letter-spacing: 14px;
+  color: #ece8e0;
+  margin-bottom: 4px;
+}
+
+.heroTitle {
+  font-size: 13px;
+  color: rgba(255, 255, 255, 0.4);
+  letter-spacing: 4px;
+}
+
+.expRow {
+  margin-top: 20px;
+  display: flex;
+  align-items: center;
+  gap: 12px;
+}
+
+.expLabel {
+  font-size: 11px;
+  color: rgba(255, 255, 255, 0.3);
+  letter-spacing: 1px;
+  white-space: nowrap;
+}
+
+.expBar {
+  flex: 1;
+  height: 3px;
+  background: rgba(255, 255, 255, 0.06);
+  position: relative;
+}
+
+.expFill {
+  height: 100%;
+  background: linear-gradient(90deg, rgba(255, 255, 255, 0.6), #ece8e0);
+  transition: width 0.5s ease;
+}
+
+/* ── 灵力/功法 小卡片 ── */
+.sideCards {
+  flex: 1;
+  display: flex;
+  flex-direction: column;
+  gap: 16px;
+}
+
+.sideCard {
+  flex: 1;
+  background: rgba(255, 255, 255, 0.02);
+  border: 1px solid rgba(255, 255, 255, 0.05);
+  padding: 24px;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  text-align: center;
+}
+
+.scIcon {
+  font-size: 32px;
+  margin-bottom: 8px;
+}
+
+.scVal {
+  font-size: 36px;
+  font-weight: 900;
+  color: #ece8e0;
+  line-height: 1;
+}
+
+.scLabel {
+  font-size: 11px;
+  color: rgba(255, 255, 255, 0.35);
+  letter-spacing: 3px;
+  margin-top: 6px;
+}
+
+.scSub {
+  font-size: 10px;
+  color: rgba(255, 255, 255, 0.2);
+  margin-top: 4px;
+}
+
+/* ── 突破条件 ── */
+.btStrip {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  padding: 14px 24px;
+  border-top: 1px solid rgba(255, 255, 255, 0.05);
+  background: rgba(255, 255, 255, 0.01);
+}
+
+.btLabel {
+  font-size: 12px;
+  color: rgba(255, 255, 255, 0.3);
+  letter-spacing: 3px;
+}
+
+.btReqs {
+  display: flex;
+  gap: 32px;
+  font-size: 12px;
+  color: rgba(255, 255, 255, 0.2);
+  letter-spacing: 2px;
+}
+
+.done {
+  color: rgba(255, 255, 255, 0.7);
+}
+
+.remain {
+  color: #c8323c;
+}
+
+.maxBanner {
+  text-align: center;
+  padding: 20px;
+  font-size: 16px;
+  color: rgba(255, 255, 255, 0.5);
+  letter-spacing: 4px;
+}

@@ -1,0 +1,108 @@
+.page {
+  flex: 1;
+  padding: 80px 48px 48px;
+  overflow-y: auto;
+}
+
+.container {
+  max-width: 900px;
+  margin: 0 auto;
+}
+
+.title {
+  font-size: 28px;
+  font-weight: 900;
+  letter-spacing: 10px;
+  color: #ece8e0;
+}
+
+.subtitle {
+  font-size: 12px;
+  color: rgba(255, 255, 255, 0.3);
+  letter-spacing: 2px;
+  margin-top: 6px;
+  margin-bottom: 28px;
+}
+
+.grid {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  gap: 16px;
+}
+
+.card {
+  background: rgba(255, 255, 255, 0.02);
+  border: 1px solid rgba(255, 255, 255, 0.05);
+  padding: 20px;
+  cursor: pointer;
+  transition: all 0.2s;
+}
+
+.card:hover {
+  background: rgba(255, 255, 255, 0.05);
+  border-color: rgba(255, 255, 255, 0.12);
+}
+
+.learned {
+  opacity: 0.5;
+}
+
+.learned:hover {
+  opacity: 0.8;
+}
+
+.cardHeader {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  margin-bottom: 8px;
+}
+
+.spellName {
+  font-size: 18px;
+  font-weight: 700;
+  letter-spacing: 3px;
+  color: #ece8e0;
+}
+
+.diffBadge {
+  font-size: 10px;
+  padding: 2px 8px;
+  letter-spacing: 1px;
+  border: 1px solid;
+}
+
+.diff1 {
+  color: rgba(255, 255, 255, 0.5);
+  border-color: rgba(255, 255, 255, 0.2);
+}
+
+.diff2 {
+  color: #b8860b;
+  border-color: rgba(184, 134, 11, 0.3);
+}
+
+.diff3 {
+  color: #c8323c;
+  border-color: rgba(200, 50, 60, 0.3);
+}
+
+.category {
+  font-size: 10px;
+  color: rgba(255, 255, 255, 0.25);
+  letter-spacing: 2px;
+  margin-bottom: 8px;
+}
+
+.cardDesc {
+  font-size: 11px;
+  color: rgba(255, 255, 255, 0.3);
+  line-height: 1.6;
+}
+
+.learnedTag {
+  margin-top: 10px;
+  font-size: 11px;
+  color: rgba(184, 134, 11, 0.6);
+  letter-spacing: 2px;
+}

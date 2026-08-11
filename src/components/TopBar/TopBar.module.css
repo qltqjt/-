@@ -1,0 +1,75 @@
+.topBar {
+  display: flex;
+  justify-content: flex-end;
+  align-items: center;
+  gap: 12px;
+  position: fixed;
+  top: 16px;
+  right: 32px;
+  z-index: 10;
+}
+
+.playerCard {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  background: rgba(255, 255, 255, 0.04);
+  padding: 8px 18px 8px 8px;
+  border: 1px solid rgba(255, 255, 255, 0.06);
+}
+
+.avatar {
+  width: 36px;
+  height: 36px;
+  border-radius: 50%;
+  background: linear-gradient(135deg, #c8323c, #8b1a23);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-size: 16px;
+  font-weight: bold;
+  color: #ece8e0;
+  border: 2px solid rgba(255, 255, 255, 0.15);
+  flex-shrink: 0;
+}
+
+.info {
+  display: flex;
+  flex-direction: column;
+}
+
+.name {
+  font-size: 14px;
+  font-weight: 700;
+  letter-spacing: 2px;
+  color: #ece8e0;
+}
+
+.grade {
+  font-size: 10px;
+  color: rgba(255, 255, 255, 0.4);
+  letter-spacing: 1px;
+}
+
+.lvBadge {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  background: rgba(255, 255, 255, 0.03);
+  padding: 6px 14px;
+  border: 1px solid rgba(255, 255, 255, 0.08);
+}
+
+.lvNum {
+  font-size: 26px;
+  font-weight: 900;
+  color: #ece8e0;
+  line-height: 1;
+}
+
+.lvLabel {
+  font-size: 9px;
+  color: rgba(255, 255, 255, 0.4);
+  letter-spacing: 2px;
+  margin-top: 2px;
+}
