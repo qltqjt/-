@@ -26,15 +26,17 @@ export default function SpiritTraining() {
   const currentWord = batchWords[currentIdx - batchStart];
 
   function handleNext() {
+    if (!student) return;
     if (currentIdx - batchStart >= BATCH_SIZE - 1) {
       // 完成一组 10 个
       const updates = addSpiritPower(student, BATCH_SIZE);
+      const newLevel = updates.level ?? student.level;
       updateStudent(student.id, {
-        level: updates.level ?? student.level,
+        level: newLevel,
         spiritPower: updates.spiritPower ?? student.spiritPower,
       });
       refreshStudent();
-      alert(`✨ 修炼完成！灵力 +${BATCH_SIZE}，升了 ${(updates.level ?? student.level) - student.level} 级！`);
+      alert(`✨ 修炼完成！灵力 +${BATCH_SIZE}，升了 ${newLevel - student.level} 级！`);
       navigate('/home');
     } else {
       setCurrentIdx(i => i + 1);

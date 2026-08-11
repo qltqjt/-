@@ -25,7 +25,7 @@ export default function Tribulation() {
   const allPassed = results.length === quiz.length && results.every(r => r);
 
   function handleAnswer() {
-    if (selected === null) return;
+    if (selected === null || !student || !spell) return;
 
     const correct = selected === question.answer;
     const newResults = [...results, correct];
